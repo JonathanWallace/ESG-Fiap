@@ -21,7 +21,7 @@ public class CargoController {
     }
 
     @GetMapping("/cargos/{id}")
-    public ResponseEntity buscarCargoPorId(@PathVariable Long id) {
+    public ResponseEntity buscarCargoPorId(@PathVariable String id) {
         Cargo cargo = cargoService.buscarPorId(id);
         return ResponseEntity.ok().body(cargo);
     }
@@ -33,7 +33,7 @@ public class CargoController {
     }
 
     @DeleteMapping("/cargos/{id}")
-    public ResponseEntity deletarCargo(@PathVariable Long id) {
+    public ResponseEntity deletarCargo(@PathVariable String id) {
         cargoService.removerCargo(id);
         return ResponseEntity.noContent().build();
     }

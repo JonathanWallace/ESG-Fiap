@@ -1,45 +1,51 @@
 package br.com.fiap.esg_restful.model;
 
-import jakarta.persistence.*;
+//import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.Objects;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
-@Entity
-@Table(name = "tbl_treinamento_colaborador")
+//@Entity
+//@Table(name = "tbl_treinamento_colaborador")
+@Document(collection = "treinamento_colaborador")
 public class TreinamentoColaborador {
     @Id
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "seq_tbl_treinamento_colaborador"
-    )
-    @SequenceGenerator(
-            name = "seq_tbl_treinamento_colaborador",
-            sequenceName = "seq_tbl_treinamento_colaborador",
-            allocationSize = 1
-    )
-    @Column(name = "id_treinamento")
-    private Long id;
+//    @GeneratedValue(
+//            strategy = GenerationType.SEQUENCE,
+//            generator = "seq_tbl_treinamento_colaborador"
+//    )
+//    @SequenceGenerator(
+//            name = "seq_tbl_treinamento_colaborador",
+//            sequenceName = "seq_tbl_treinamento_colaborador",
+//            allocationSize = 1
+//    )
+//    @Column(name = "id_treinamento")
+    private String id;
 
-    @ManyToOne
-    @JoinColumn(name = "id_colaborador")
+//    @ManyToOne
+//    @JoinColumn(name = "id_colaborador")
+    @DBRef
     private Colaborador colaborador;
 
-    @ManyToOne
-    @JoinColumn(name = "id_programa_treinamento")
+//    @ManyToOne
+//    @JoinColumn(name = "id_programa_treinamento")
+    @DBRef
     private ProgramaTreinamento programaTreinamento;
 
-    @Column(name = "data_inicio_treinamento")
+//    @Column(name = "data_inicio_treinamento")
     private LocalDate dataInicioTreinamento;
 
-    @Column(name = "data_termino_treinamento")
+//    @Column(name = "data_termino_treinamento")
     private LocalDate dataTerminoTreinamento;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

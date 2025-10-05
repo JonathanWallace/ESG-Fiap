@@ -1,39 +1,45 @@
 package br.com.fiap.esg_restful.model;
 
-import jakarta.persistence.*;
+//import jakarta.persistence.*;
 
 import java.util.Objects;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
-@Entity
-@Table(name = "tbl_indicadores_departamento")
+//@Entity
+//@Table(name = "tbl_indicadores_departamento")
+@Document(collection = "indicadores")
 public class IndicadoresDepartamento {
     @Id
-    private Long id;
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "id_departamento")
+    private String id;
+
+//    @OneToOne
+//    @MapsId
+//    @JoinColumn(name = "id_departamento")
+    @DBRef
     private Departamento departamento;
     
-    @Column(name = "quantidade_colaboradores")
+//    @Column(name = "quantidade_colaboradores")
     private int quantidadeColaboradores;
     
-    @Column(name = "percentual_mulheres")
+//    @Column(name = "percentual_mulheres")
     private double percentualMulheres;
     
-    @Column(name = "percentual_negros")
+//    @Column(name = "percentual_negros")
     private double percentualNegros;
     
-    @Column(name = "percentual_pcds")
+//    @Column(name = "percentual_pcds")
     private double percentualPcds;
     
-    @Column(name = "percentual_lgbtqia")
+//    @Column(name = "percentual_lgbtqia")
     private double percentualLgbtqia;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

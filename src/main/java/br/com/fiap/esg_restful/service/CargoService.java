@@ -19,7 +19,7 @@ public class CargoService {
         return cargoRepository.findAll(paginacao);
     }
 
-    public Cargo buscarPorId(Long id) {
+    public Cargo buscarPorId(String id) {
         Optional<Cargo> cargoOptional = cargoRepository.findById(id);
         if (cargoOptional.isPresent()) {
             return cargoOptional.get();
@@ -32,7 +32,7 @@ public class CargoService {
         return cargoRepository.save(cargo);
     }
 
-    public void removerCargo(Long id) {
+    public void removerCargo(String id) {
         Optional<Cargo> cargoOptional = cargoRepository.findById(id);
         if (cargoOptional.isPresent()) {
             cargoRepository.deleteById(id);

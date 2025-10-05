@@ -1,6 +1,7 @@
 package br.com.fiap.esg_restful.model;
 
-import jakarta.persistence.*;
+//import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,34 +10,38 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
-@Entity
-@Table(name = "tbl_usuarios")
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+
+//@Entity
+//@Table(name = "tbl_usuarios")
+@Document(collection = "usuarios")
 public class Usuario implements UserDetails {
 
     @Id
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "seq_tbl_usuarios"
-    )
-    @SequenceGenerator(
-            name = "seq_tbl_usuarios",
-            sequenceName = "seq_tbl_usuarios",
-            allocationSize = 1
-    )
-    @Column(name = "usuario_id")
-    private Long userId;
+//    @GeneratedValue(
+//            strategy = GenerationType.SEQUENCE,
+//            generator = "seq_tbl_usuarios"
+//    )
+//    @SequenceGenerator(
+//            name = "seq_tbl_usuarios",
+//            sequenceName = "seq_tbl_usuarios",
+//            allocationSize = 1
+//    )
+//    @Column(name = "usuario_id")
+    private String userId;
     private String nome;
     private String email;
     private String senha;
 
-    @Enumerated(EnumType.STRING)
+//    @Enumerated(EnumType.STRING)
     private UsuarioRole role;
 
-    public Long getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

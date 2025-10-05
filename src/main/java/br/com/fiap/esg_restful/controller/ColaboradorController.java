@@ -21,7 +21,7 @@ public class ColaboradorController {
     }
 
     @GetMapping("/colaboradores/{id}")
-    public ResponseEntity listaColaboradores(@PathVariable Long id) {
+    public ResponseEntity listaColaboradores(@PathVariable String id) {
         Colaborador colaborador = colaboradorService.buscarColaboradorPorId(id);
         return ResponseEntity.ok(colaborador);
     }
@@ -33,7 +33,7 @@ public class ColaboradorController {
     }
 
     @DeleteMapping("/colaboradores/{id}")
-    public ResponseEntity deletarColaborador(@PathVariable Long id) {
+    public ResponseEntity deletarColaborador(@PathVariable String id) {
         colaboradorService.removerColaborador(id);
         return ResponseEntity.noContent().build();
     }

@@ -13,7 +13,7 @@ public class IndicadoresDepartamentoService {
     private IndicadoresDepartamentoRepository indicadoresDepartamentoRepository;
 
     public Page<IndicadoresDepartamento> listarIndicadores(Pageable paginacao) {
-        indicadoresDepartamentoRepository.atualizarIndicadoresDepartamento();
+//        indicadoresDepartamentoRepository.atualizarIndicadoresDepartamento();
         return indicadoresDepartamentoRepository.findAll(paginacao);
     }
 }

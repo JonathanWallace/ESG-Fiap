@@ -4,7 +4,7 @@ import br.com.fiap.esg_restful.model.Usuario;
 import br.com.fiap.esg_restful.model.UsuarioRole;
 
 public record UsuarioExibicaoDto(
-        Long usuarioId,
+        String usuarioId,
         String nome,
         String email,
         UsuarioRole role

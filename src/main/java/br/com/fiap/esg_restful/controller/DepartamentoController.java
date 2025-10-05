@@ -21,7 +21,7 @@ public class DepartamentoController {
     }
 
     @GetMapping("/departamentos/{id}")
-    public ResponseEntity buscarDepartamentoPorId(@PathVariable Long id) {
+    public ResponseEntity buscarDepartamentoPorId(@PathVariable String id) {
         Departamento departamento = departamentoService.buscarDepartamentoPorId(id);
         return ResponseEntity.ok().body(departamento);
     }
@@ -33,7 +33,7 @@ public class DepartamentoController {
     }
 
     @DeleteMapping("/departamentos/{id}")
-    public ResponseEntity deletarDepartamento(@PathVariable Long id) {
+    public ResponseEntity deletarDepartamento(@PathVariable String id) {
         departamentoService.removerDepartamento(id);
         return ResponseEntity.noContent().build();
     }

@@ -19,7 +19,7 @@ public class ColaboradorService {
         return colaboradorRepository.findAll(paginacao);
     }
 
-    public Colaborador buscarColaboradorPorId(Long id) {
+    public Colaborador buscarColaboradorPorId(String id) {
         Optional<Colaborador> colaborador = colaboradorRepository.findById(id);
         if (colaborador.isPresent()) {
             return colaborador.get();
@@ -32,7 +32,7 @@ public class ColaboradorService {
         return colaboradorRepository.save(colaborador);
     }
 
-    public void removerColaborador(Long id) {
+    public void removerColaborador(String id) {
         Optional<Colaborador> colaboradorOptional = colaboradorRepository.findById(id);
         System.out.println(colaboradorOptional.isPresent());
         if (colaboradorOptional.isPresent()) {

@@ -21,7 +21,7 @@ public class ProgramaTreinamentoController {
     }
 
     @GetMapping("/programas-treinamento/{id}")
-    public ResponseEntity buscarProgramaTreinamentoPorId(@PathVariable Long id) {
+    public ResponseEntity buscarProgramaTreinamentoPorId(@PathVariable String id) {
         ProgramaTreinamento programaTreinamento = programaTreinamentoService.buscarProgramaTreinamentoPorId(id);
         return ResponseEntity.ok(programaTreinamento);
     }
@@ -33,7 +33,7 @@ public class ProgramaTreinamentoController {
     }
 
     @DeleteMapping("/programas-treinamento/{id}")
-    public ResponseEntity deletarProgramaTreinamento(@PathVariable Long id) {
+    public ResponseEntity deletarProgramaTreinamento(@PathVariable String id) {
         programaTreinamentoService.removerProgramaTreinamento(id);
         return ResponseEntity.noContent().build();
     }

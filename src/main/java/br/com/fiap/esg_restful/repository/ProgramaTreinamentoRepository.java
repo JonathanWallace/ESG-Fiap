@@ -1,7 +1,8 @@
 package br.com.fiap.esg_restful.repository;
 
 import br.com.fiap.esg_restful.model.ProgramaTreinamento;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
+//import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ProgramaTreinamentoRepository extends JpaRepository<ProgramaTreinamento, Long> {
+public interface ProgramaTreinamentoRepository extends MongoRepository<ProgramaTreinamento, String> {
 }

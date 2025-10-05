@@ -19,7 +19,7 @@ public class DepartamentoService {
         return departamentoRepository.findAll(paginacao);
     }
 
-    public Departamento buscarDepartamentoPorId(Long id) {
+    public Departamento buscarDepartamentoPorId(String id) {
         Optional<Departamento> departamento = departamentoRepository.findById(id);
         if (departamento.isPresent()) {
             return departamento.get();
@@ -32,7 +32,7 @@ public class DepartamentoService {
         return departamentoRepository.save(departamento);
     }
 
-    public void removerDepartamento(Long id) {
+    public void removerDepartamento(String id) {
         Optional<Departamento> departamento = departamentoRepository.findById(id);
         if (departamento.isPresent()) {
             departamentoRepository.deleteById(id);

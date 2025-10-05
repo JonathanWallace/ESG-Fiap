@@ -19,7 +19,7 @@ public class ProgramaTreinamentoService {
         return programaTreinamentoRepository.findAll(paginacao);
     }
 
-    public ProgramaTreinamento buscarProgramaTreinamentoPorId(Long id) {
+    public ProgramaTreinamento buscarProgramaTreinamentoPorId(String id) {
         Optional<ProgramaTreinamento> programaTreinamentoOptional = programaTreinamentoRepository.findById(id);
         if (programaTreinamentoOptional.isPresent()) {
             return programaTreinamentoOptional.get();
@@ -32,7 +32,7 @@ public class ProgramaTreinamentoService {
         return programaTreinamentoRepository.save(programaTreinamento);
     }
 
-    public void removerProgramaTreinamento(Long id) {
+    public void removerProgramaTreinamento(String id) {
         Optional<ProgramaTreinamento> programaTreinamentoOptional = programaTreinamentoRepository.findById(id);
         if (programaTreinamentoOptional.isPresent()) {
             programaTreinamentoRepository.delete(programaTreinamentoOptional.get());

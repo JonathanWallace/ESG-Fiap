@@ -1,35 +1,39 @@
 package br.com.fiap.esg_restful.model;
+//
+//import jakarta.persistence.*;
 
-import jakarta.persistence.*;
 import java.util.Objects;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
-@Table(name = "tbl_cargo")
+//@Entity
+//@Table(name = "tbl_cargo")
+@Document(collection = "cargos")
 public class Cargo {
     @Id
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "seq_tbl_cargo"
-    )
-    @SequenceGenerator(
-            name = "seq_tbl_cargo",
-            sequenceName = "seq_tbl_cargo",
-            allocationSize = 1
-    )
-    @Column(name = "id_cargo")
-    private Long id;
+//    @GeneratedValue(
+//            strategy = GenerationType.SEQUENCE,
+//            generator = "seq_tbl_cargo"
+//    )
+//    @SequenceGenerator(
+//            name = "seq_tbl_cargo",
+//            sequenceName = "seq_tbl_cargo",
+//            allocationSize = 1
+//    )
+//    @Column(name = "id_cargo")
+    private String id;
 
-    @Column(name = "nome_cargo")
+//    @Column(name = "nome_cargo")
     private String nome;
 
-    @Column(name = "nivel_cargo")
+//    @Column(name = "nivel_cargo")
     private String nivel;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

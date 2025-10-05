@@ -1,43 +1,49 @@
 package br.com.fiap.esg_restful.model;
 
-import jakarta.persistence.*;
+//import jakarta.persistence.*;
 
 import java.util.Objects;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
-@Entity
-@Table(name = "tbl_programa_treinamento")
+
+//@Entity
+//@Table(name = "tbl_programa_treinamento")
+@Document(collection = "programa")
 public class ProgramaTreinamento {
     @Id
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "seq_tbl_programa_treinamento"
-    )
-    @SequenceGenerator(
-            name = "seq_tbl_programa_treinamento",
-            sequenceName = "seq_tbl_programa_treinamento",
-            allocationSize = 1
-    )
-    @Column(name = "id_programa_treinamento")
-    private Long id;
+//    @GeneratedValue(
+//            strategy = GenerationType.SEQUENCE,
+//            generator = "seq_tbl_programa_treinamento"
+//    )
+//    @SequenceGenerator(
+//            name = "seq_tbl_programa_treinamento",
+//            sequenceName = "seq_tbl_programa_treinamento",
+//            allocationSize = 1
+//    )
+//    @Column(name = "id_programa_treinamento")
+    private String id;
 
-    @Column(name = "nome_programa")
+//    @Column(name = "nome_programa")
     private String nome;
 
-    @Column(name = "tipo_programa")
+//    @Column(name = "tipo_programa")
     private String tipo;
 
-    @ManyToOne
-    @JoinColumn(name = "id_departamento")
+//    @ManyToOne
+//    @JoinColumn(name = "id_departamento")
+    @DBRef
     private Departamento departamento;
 
-    @Column(name = "status_programa")
+//    @Column(name = "status_programa")
     private char status;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

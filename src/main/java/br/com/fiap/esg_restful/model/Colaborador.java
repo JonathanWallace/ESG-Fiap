@@ -1,63 +1,70 @@
 package br.com.fiap.esg_restful.model;
 
-import jakarta.persistence.*;
+//import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.Objects;
 
-@Entity
-@Table(name = "tbl_colaborador")
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+
+//@Entity
+//@Table(name = "tbl_colaborador")
+@Document(collection = "colaboradores")
 public class Colaborador {
     @Id
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "seq_tbl_colaborador"
-    )
-    @SequenceGenerator(
-            name = "seq_tbl_colaborador",
-            sequenceName = "seq_tbl_colaborador",
-            allocationSize = 1
-    )
-    @Column(name = "id_colaborador")
-    private Long id;
+//    @GeneratedValue(
+//            strategy = GenerationType.SEQUENCE,
+//            generator = "seq_tbl_colaborador"
+//    )
+//    @SequenceGenerator(
+//            name = "seq_tbl_colaborador",
+//            sequenceName = "seq_tbl_colaborador",
+//            allocationSize = 1
+//    )
+//    @Column(name = "id_colaborador")
+    private String id;
 
-    @Column(name = "nome_colaborador")
+//    @Column(name = "nome_colaborador")
     private String nome;
 
-    @Column(name = "raca_etinia_colaborador")
+//    @Column(name = "raca_etinia_colaborador")
     private String raca;
 
-    @Column(name = "genero_colaborador")
+//    @Column(name = "genero_colaborador")
     private String genero;
 
-    @Column(name = "data_nascimento_colaborador")
+//    @Column(name = "data_nascimento_colaborador")
     private LocalDate dataNascimento;
 
-    @Column(name = "data_admissao_colaborador")
+//    @Column(name = "data_admissao_colaborador")
     private LocalDate dataAdmissao;
 
-    @ManyToOne
-    @JoinColumn(name = "id_departamento")
+//    @ManyToOne
+//    @JoinColumn(name = "id_departamento")
+    @DBRef
     private Departamento departamento;
 
-    @ManyToOne
-    @JoinColumn(name = "id_cargo")
+//    @ManyToOne
+//    @JoinColumn(name = "id_cargo")
+    @DBRef
     private Cargo cargo;
 
-    @Column(name = "salario_colaborador")
+//    @Column(name = "salario_colaborador")
     private double salario;
 
-    @Column(name = "possui_deficiencia")
+//    @Column(name = "possui_deficiencia")
     private boolean possuiDeficiencia;
 
-    @Column(name = "orientacao_sexual_colaborador")
+//    @Column(name = "orientacao_sexual_colaborador")
     private String orientacaoSexual;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
