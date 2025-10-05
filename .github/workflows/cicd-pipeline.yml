@@ -39,9 +39,13 @@ jobs:
     needs: build-and-test # Depende do sucesso do build
     environment:
       name: staging
-      url: https://${{ secrets.AZURE_APP_NAME }}.azurewebsites.net # URL dinâmica!
+#      url: https://${{ secrets.AZURE_APP_NAME }}.azurewebsites.net # URL dinâmica!
 
     steps:
+      - # PASSO DE DEBUG: Vamos imprimir o segredo para provar que ele existe.
+        - name: Print Azure App Name for Staging
+          run: echo "O nome do app de staging é ${{ secrets.AZURE_APP_NAME }}"
+
       # 1. Baixa o artefato (.jar) do job de build
       - name: Download Artifact
         uses: actions/download-artifact@v4
