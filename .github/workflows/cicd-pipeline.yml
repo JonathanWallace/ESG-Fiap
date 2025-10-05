@@ -39,7 +39,7 @@ jobs:
     needs: build-and-test # Depende do sucesso do build
     environment:
       name: staging
-      url: https://${{ secrets.AZURE_APP_NAME }}.azurewebsites.net # URL dinâmica!
+#      url: https://${{ secrets.AZURE_APP_NAME }}.azurewebsites.net # URL dinâmica!
 
     steps:
       # 1. Baixa o artefato (.jar) do job de build
@@ -69,7 +69,7 @@ jobs:
     needs: deploy-staging # Depende do sucesso do deploy em staging
     environment:
       name: production
-      url: https://${{ secrets.AZURE_APP_NAME }}.azurewebsites.net # URL dinâmica!
+#      url: https://${{ secrets.AZURE_APP_NAME }}.azurewebsites.net # URL dinâmica!
 
     steps:
       # 1. Baixa o artefato (.jar)
