@@ -1,0 +1,93 @@
+name: ESG-Restful CI/CD to Azure
+
+# Gatilhos
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+# Definição dos Jobs
+jobs:
+  # -------------------- JOB 1: BUILD & TEST --------------------
+  build-and-test:
+    name: Build & Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Build and Run Tests with Maven
+        run: mvn -B clean install
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ESG-Restful-App
+          path: target/*.jar
+
+  # -------------------- JOB 2: DEPLOY EM STAGING --------------------
+  deploy-staging:
+    name: Deploy to Azure App Service (Staging)
+    runs-on: ubuntu-latest
+    needs: build-and-test # Depende do sucesso do build
+    environment:
+      name: staging
+      url: https://${{ secrets.AZURE_APP_NAME }}.azurewebsites.net # URL dinâmica!
+
+    steps:
+      # 1. Baixa o artefato (.jar) do job de build
+      - name: Download Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ESG-Restful-App
+
+      # 2. Faz login no Azure usando o Service Principal
+      - name: Log in to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      # 3. Faz o deploy para o App Service de Staging
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ secrets.AZURE_APP_NAME }} # Pega o nome do segredo do ambiente 'staging'
+          package: '*.jar' # O artefato que foi baixado
+          java-version: '21' # Informa a versão do Java para o App Service
+
+  # -------------------- JOB 3: DEPLOY EM PRODUÇÃO --------------------
+  deploy-production:
+    name: Deploy to Azure App Service (Production)
+    runs-on: ubuntu-latest
+    needs: deploy-staging # Depende do sucesso do deploy em staging
+    environment:
+      name: production
+      url: https://${{ secrets.AZURE_APP_NAME }}.azurewebsites.net # URL dinâmica!
+
+    steps:
+      # 1. Baixa o artefato (.jar)
+      - name: Download Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ESG-Restful-App
+
+      # 2. Faz login no Azure
+      - name: Log in to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      # 3. Faz o deploy para o App Service de Produção
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ secrets.AZURE_APP_NAME }} # Pega o nome do segredo do ambiente 'production'
+          package: '*.jar'
+          java-version: '21'
