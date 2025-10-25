@@ -36,6 +36,9 @@ public class ApplicationExceptionHandler {
             if (mensagem.contains("ORA-02292")){
                 mapaDeErros.put("mensagem", "Entidade possui dependentes no banco de dados");
             }
+            if (mensagem.contains("ORA-01400")){
+                mapaDeErros.put("mensagem", "Entidade não pode possuir dados nulos");
+            }
         }
         return mapaDeErros;
     }

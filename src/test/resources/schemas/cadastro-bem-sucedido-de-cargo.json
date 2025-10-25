@@ -1,0 +1,43 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://example.com/object1761404604.json",
+  "title": "Root",
+  "type": "object",
+  "required": [
+    "id",
+    "nome",
+    "nivel"
+  ],
+  "properties": {
+    "id": {
+      "$id": "#root/id",
+      "title": "Id",
+      "type": "integer",
+      "examples": [
+        23
+      ],
+      "default": 0
+    },
+    "nome": {
+      "$id": "#root/nome",
+      "title": "Nome",
+      "type": "string",
+      "default": "",
+      "examples": [
+        "Desenvolvedor"
+      ],
+      "pattern": "^.*$"
+    },
+    "nivel": {
+      "$id": "#root/nivel",
+      "title": "Nivel",
+      "type": "string",
+      "default": "",
+      "examples": [
+        "Pleno"
+      ],
+      "pattern": "^.*$"
+    }
+  }
+}

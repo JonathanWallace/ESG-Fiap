@@ -1,0 +1,77 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Resposta de Cadastro de Colaborador",
+  "type": "object",
+  "required": [
+    "id",
+    "nome",
+    "raca",
+    "genero",
+    "dataNascimento",
+    "dataAdmissao",
+    "departamento",
+    "cargo",
+    "salario",
+    "possuiDeficiencia",
+    "orientacaoSexual"
+  ],
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "O ID único do colaborador gerado pelo sistema."
+    },
+    "nome": {
+      "type": "string",
+      "description": "Nome completo do colaborador."
+    },
+    "raca": {
+      "type": "string",
+      "description": "Raça ou etnia autodeclarada do colaborador."
+    },
+    "genero": {
+      "type": "string",
+      "description": "Gênero autodeclarado do colaborador."
+    },
+    "dataNascimento": {
+      "type": "string",
+      "description": "Data de nascimento no formato AAAA-MM-DD.",
+      "format": "date"
+    },
+    "dataAdmissao": {
+      "type": "string",
+      "description": "Data de admissão no formato AAAA-MM-DD.",
+      "format": "date"
+    },
+    "departamento": {
+      "type": "object",
+      "description": "O departamento ao qual o colaborador pertence.",
+      "required": ["id", "nome"],
+      "properties": {
+        "id": { "type": "integer" },
+        "nome": { "type": "string" }
+      }
+    },
+    "cargo": {
+      "type": "object",
+      "description": "O cargo que o colaborador ocupa.",
+      "required": ["id", "nome"],
+      "properties": {
+        "id": { "type": "integer" },
+        "nome": { "type": "string" }
+      }
+    },
+    "salario": {
+      "type": "number",
+      "description": "O salário bruto do colaborador."
+    },
+    "possuiDeficiencia": {
+      "type": "boolean",
+      "description": "Indica se o colaborador possui alguma deficiência."
+    },
+    "orientacaoSexual": {
+      "type": "string",
+      "description": "Orientação sexual autodeclarada do colaborador."
+    }
+  },
+  "additionalProperties": false
+}

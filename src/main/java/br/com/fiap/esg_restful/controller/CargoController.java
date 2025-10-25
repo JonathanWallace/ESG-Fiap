@@ -7,6 +7,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 
 @RestController
 @RequestMapping("/api")
@@ -29,7 +32,12 @@ public class CargoController {
     @PostMapping("/cargos")
     public ResponseEntity adicionarCargo(@RequestBody Cargo cargo) {
         Cargo cargoSalvo = cargoService.adicionarCargo(cargo);
-        return ResponseEntity.ok().body(cargoSalvo);
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(cargoSalvo.getId())
+                .toUri();
+        return ResponseEntity.created(location).body(cargoSalvo);
     }
 
     @DeleteMapping("/cargos/{id}")

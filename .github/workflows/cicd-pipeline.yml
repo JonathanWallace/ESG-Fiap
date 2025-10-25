@@ -1,4 +1,4 @@
-name: ESG-Restful CI/CD to Azure
+name: ESG-Restful CI/CD no Azure
 
 on:
   push:
@@ -20,7 +20,7 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
-      - name: Build and Run Tests with Maven
+      - name: Build and Run Tests com Maven
         run: mvn -B clean install
 
       - name: Upload Artifact
@@ -30,7 +30,7 @@ jobs:
           path: target/*.jar
 
   deploy-staging:
-    name: Deploy to Azure App Service (Staging)
+    name: Deploy no Azure App Service (Staging)
     runs-on: ubuntu-latest
     needs: build-and-test
     environment:
@@ -42,12 +42,12 @@ jobs:
         with:
           name: ESG-Restful-App
 
-      - name: Log in to Azure
+      - name: Log in no Azure
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Deploy to Azure Web App
+      - name: Deploy no Azure Web App
         uses: azure/webapps-deploy@v2
         with:
           app-name: ${{ secrets.AZURE_APP_NAME }}
@@ -55,7 +55,7 @@ jobs:
           java-version: '21'
 
   deploy-production:
-    name: Deploy to Azure App Service (Production)
+    name: Deploy no Azure App Service (Production)
     runs-on: ubuntu-latest
     needs: deploy-staging
     environment:
@@ -68,12 +68,12 @@ jobs:
         with:
           name: ESG-Restful-App
 
-      - name: Log in to Azure
+      - name: Log in no Azure
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Deploy to Azure Web App
+      - name: Deploy para Azure Web App
         uses: azure/webapps-deploy@v2
         with:
           app-name: ${{ secrets.AZURE_APP_NAME }}

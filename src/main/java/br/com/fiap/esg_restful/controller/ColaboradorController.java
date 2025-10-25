@@ -7,6 +7,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 
 @RestController
 @RequestMapping("/api")
@@ -29,7 +32,13 @@ public class ColaboradorController {
     @PostMapping("/colaboradores")
     public ResponseEntity salvarColaborador(@RequestBody Colaborador colaborador) {
         Colaborador colaboradorSalvo = colaboradorService.adicionarColaborador(colaborador);
-        return ResponseEntity.ok(colaboradorSalvo);
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(colaboradorSalvo.getId())
+                .toUri();
+
+        return ResponseEntity.created(location).body(colaboradorSalvo);
     }
 
     @DeleteMapping("/colaboradores/{id}")
