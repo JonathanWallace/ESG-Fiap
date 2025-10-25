@@ -78,6 +78,54 @@ O pipeline é definido no arquivo `.github/workflows/cicd-pipeline.yml` e é aci
     *   O processo é o mesmo da etapa de staging, mas utiliza as credenciais e configurações do ambiente de **produção**.
 
 ---
+## 🧪 Testes Automatizados da API
+
+O projeto conta com uma suíte de testes de API automatizados para garantir a qualidade e a estabilidade dos endpoints. Os testes foram desenvolvidos seguindo o padrão **BDD (Behavior-Driven Development)** para tornar os cenários legíveis e alinhados às regras de negócio.
+
+A estrutura de testes utiliza as seguintes tecnologias:
+*   **Cucumber:** Para escrita dos cenários em Gherkin (`.feature`).
+*   **RestAssured:** Para realizar as chamadas HTTP para a API.
+*   **GSON:** Para serialização dos objetos de teste em JSON.
+*   **JUnit:** Como executor dos testes.
+
+### Pré-requisitos
+*   [Java JDK 21](https://www.oracle.com/java/technologies/downloads/#java21) ou superior instalado.
+*   [Apache Maven](https://maven.apache.org/download.cgi) instalado e configurado nas variáveis de ambiente.
+*   Uma instância da **API ESG Restful deve estar em execução**. Você pode iniciá-la localmente seguindo o guia "Como executar localmente com Docker" acima.
+
+### Como Executar os Testes
+
+1.  **Inicie a API:**
+    Certifique-se de que a aplicação esteja rodando. O método mais simples é usar o Docker Compose, conforme descrito no início deste README.
+    ```bash
+    docker-compose up
+    ```
+
+2.  **Execute o Comando Maven Test:**
+    Abra um novo terminal na pasta raiz do projeto e execute o comando Maven para rodar a suíte de testes:
+    ```bash
+    mvn test
+    ```
+    Este comando irá compilar as classes de teste e executar todos os cenários definidos nos arquivos `.feature` localizados em `src/test/resources/features`.
+
+### Interpretando os Resultados
+
+*   **Sucesso:** Ao final da execução, o Maven exibirá uma mensagem de `BUILD SUCCESS`. O log mostrará cada cenário passando, com a cor verde ou marcações de sucesso.
+
+*   **Falha:** Se algum cenário falhar, o Maven exibirá `BUILD FAILURE`. O log indicará exatamente qual passo (`step`) falhou e fornecerá uma `AssertionError` ou outra exceção, ajudando a identificar a causa do problema.
+
+*   **Relatórios:** Para uma visualização mais amigável, o Cucumber gera um relatório HTML detalhado. Após a execução dos testes, abra o seguinte arquivo no seu navegador:
+    `target/cucumber-report/index.html`
+
+### Estrutura dos Testes
+Os testes seguem uma arquitetura em camadas para garantir organização e manutenibilidade:
+*   `src/test/resources/features/*.feature`: Arquivos Gherkin com a especificação dos cenários de teste em português.
+*   `src/test/java/steps/`: Classes "Steps" que fazem a "cola" entre o Gherkin e o código Java.
+*   `src/test/java/services/`: Classes de serviço que encapsulam a lógica de interação com a API usando RestAssured.
+*   `src/test/java/model/`: POJOs (Models) que representam os corpos de requisição e resposta para os testes.
+*   `src/test/resources/schemas/`: Arquivos JSON Schema para validação de contrato das respostas da API.
+
+---
 
 ## 🐳 Containerização
 
